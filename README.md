@@ -1,1 +1,1 @@
-# trading-app-backend
+# trading-simulator-backend
