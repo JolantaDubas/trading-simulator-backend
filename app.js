@@ -70,6 +70,20 @@ dbConnection
 const app = express();
 
 app.use(cors());
+
+// app.use(function (req, res, next) {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   next();
+
+//   next(createError(404));
+// });
+
+// header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+// header("Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token");
+
 //use the public folder to serve web pages
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -85,6 +99,8 @@ app.use(express.json());
 
 // api routes
 app.use("/api/user", require("./api/user"));
+app.use("/api/trade", require("./api/trade"));
+app.use("/api/capital", require("./api/capital"));
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));

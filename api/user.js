@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const UserModel = require("../modal/UserModal");
+const UserModel = require("../model/userModel");
+const CapitalModel = require("../model/capitalModel");
+
 const bcrypt = require("bcrypt");
 const webToken = require("jsonwebtoken");
 require("dotenv").config();
@@ -32,23 +34,27 @@ router.post("/register", function (req, res) {
         bcrypt.genSalt(10, function (err, salt) {
           bcrypt.hash(password, salt, function (err, hash) {
             // CRETAE RECORD IN DB
+
             UserModel.create({
               user_name: username,
               email: email,
               password: hash,
-            })
-              .then((value) =>
-                res.status(201).json({
-                  message: "Account has been created successfully",
-                  status: res.statusCode,
-                })
-              )
-              .catch((err) =>
-                res.status(404).json({
-                  message: "Something went wrong",
-                  status: res.statusCode,
-                })
-              );
+              account_balance: 10000.0,
+            }).then((value) => {
+              res.status(201).json({
+                message: "Account has been created successfully",
+                status: res.statusCode,
+              });
+              console.log("value", value),
+                CapitalModel.create({
+                  user_id: value.dataValues.id,
+                  name: "Euro",
+                  key: "eur",
+                  symbol: "eur",
+                  image: "",
+                  amount: 100000,
+                });
+            });
           });
         });
       } else {
@@ -95,13 +101,15 @@ router.post("/login", function (req, res) {
 
         const userDetail = {
           name: value.getDataValue("user_name"),
+          email: value.getDataValue("email"),
+          account: value.getDataValue("account_balance"),
           id: value.getDataValue("id"),
         };
 
         bcrypt.compare(password, dbPassword, function (err, result) {
           if (result) {
             const token = webToken.sign(userDetail, process.env.secret_key, {
-              expiresIn: "60s",
+              expiresIn: "7d",
             });
             res.status(200).json({
               message: "Logged In successfully",
@@ -120,10 +128,12 @@ router.post("/login", function (req, res) {
     });
   }
 });
+const app = express();
 
 // get UserProfil API
 router.get("/profile", function (req, res) {
-  const authHeader = req.headers["authorization"];
+  const authHeader = req.headers.authorization;
+
   if (authHeader) {
     const token = authHeader.substr("Bearer".length + 1);
 

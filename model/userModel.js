@@ -1,6 +1,7 @@
 const sequelize = require("../connections/db");
 
 const { DataTypes, Model } = require("sequelize");
+const Trade = require("./tradeModel");
 
 class User extends Model {}
 
@@ -16,6 +17,7 @@ User.init(
     user_name: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false },
+    account_balance: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
   },
   {
     modelName: "user_table",
