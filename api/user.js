@@ -39,21 +39,19 @@ router.post("/register", function (req, res) {
               user_name: username,
               email: email,
               password: hash,
-              account_balance: 10000.0,
             }).then((value) => {
               res.status(201).json({
                 message: "Account has been created successfully",
                 status: res.statusCode,
               });
-              console.log("value", value),
-                CapitalModel.create({
-                  user_id: value.dataValues.id,
-                  name: "Euro",
-                  key: "eur",
-                  symbol: "eur",
-                  image: "",
-                  amount: 100000,
-                });
+              CapitalModel.create({
+                user_id: value.dataValues.id,
+                name: "Euro",
+                key: "eur",
+                symbol: "eur",
+                image: "",
+                amount: 100000,
+              });
             });
           });
         });
@@ -102,7 +100,6 @@ router.post("/login", function (req, res) {
         const userDetail = {
           name: value.getDataValue("user_name"),
           email: value.getDataValue("email"),
-          account: value.getDataValue("account_balance"),
           id: value.getDataValue("id"),
         };
 

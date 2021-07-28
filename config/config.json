@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "tradingapp",
-    "host": "127.0.0.1",
+    "username": "bd787ae584aba0",
+    "password": "99d14cad",
+    "database": "heroku_3e0b90c08bb5909",
+    "host": "us-cdbr-east-04.cleardb.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "bd787ae584aba0",
+    "password": "99d14cad",
+    "database": "heroku_3e0b90c08bb5909",
+    "host": "us-cdbr-east-04.cleardb.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "bd787ae584aba0",
+    "password": "99d14cad",
+    "database": "heroku_3e0b90c08bb5909",
+    "host": "us-cdbr-east-04.cleardb.com",
     "dialect": "mysql"
   }
 }

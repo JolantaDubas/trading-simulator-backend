@@ -43,9 +43,7 @@ router.post("/create", function (req, res) {
           name: currency,
           user_id: userId,
         },
-      }).then((value) => {
-        console.log("capital", value);
-      });
+      }).then((value) => {});
 
       CapitalModel.create({
         user_id: userId,
@@ -72,7 +70,6 @@ router.post("/create", function (req, res) {
 
 router.put("/update", function (req, res) {
   var tradeId = req.query.id;
-  console.log("tradeId", tradeId);
   if (tradeId) {
     CapitalModel.update({
       where: {
@@ -95,7 +92,6 @@ router.put("/update", function (req, res) {
 
 router.delete("/delete", function (req, res) {
   var tradeId = req.query.id;
-  console.log("tradeId", tradeId);
   if (tradeId) {
     CapitalModel.delete({
       where: {

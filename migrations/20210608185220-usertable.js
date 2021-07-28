@@ -19,7 +19,6 @@ module.exports = {
       user_name: { type: Sequelize.STRING, allowNull: false },
       password: { type: Sequelize.STRING, allowNull: false },
       email: { type: Sequelize.STRING, allowNull: false },
-      account_balance: { type: Sequelize.INTEGER, allowNull: false },
     });
   },
 

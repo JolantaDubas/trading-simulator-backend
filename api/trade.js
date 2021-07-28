@@ -23,8 +23,8 @@ router.post("/create", function (req, res) {
     } else {
       if (buy) {
         //create new capital if not exist
-        var findOrCreate = CapitalModel.findOrCreate({
-          where: { user_id: userId, key: coin },
+        CapitalModel.findOrCreate({
+          where: { user_id: userId, key: key },
           defaults: {
             name: coin,
             key: key,
@@ -48,11 +48,11 @@ router.post("/create", function (req, res) {
       } else {
         //if sell
         CapitalModel.increment([`amount`], {
-          by: amount,
+          by: amount * price,
           where: { user_id: userId, key: currency },
         });
         CapitalModel.decrement([`amount`], {
-          by: amount / price,
+          by: amount,
           where: { user_id: userId, key: key },
         });
       }
