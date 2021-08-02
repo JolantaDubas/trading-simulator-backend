@@ -89,8 +89,14 @@ router.get("/list", function (req, res) {
     TradeModel.findAll({
       where: {
         //  coin: byCoin,
-        [Op.and]: [{ user_id: userId }, byCoin && { key: byCoin }],
+
+        [Op.and]: [
+          { user_id: userId },
+          byCoin && { key: byCoin },
+          //  { order: [["date", "DESC"]] },
+        ],
       },
+      order: [["date", "DESC"]],
     }).then((value) =>
       res.status(200).json({
         message: "success",
