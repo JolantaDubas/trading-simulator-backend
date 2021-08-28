@@ -30,10 +30,10 @@ router.post("/register", function (req, res) {
       },
     }).then((value) => {
       if (value === null) {
-        //HASH THE PASSWORD
+        //hashowanie hasła
         bcrypt.genSalt(10, function (err, salt) {
           bcrypt.hash(password, salt, function (err, hash) {
-            // CRETAE RECORD IN DB
+            // tworzenie nowego użytkownika w bd
 
             UserModel.create({
               user_name: username,
@@ -57,7 +57,7 @@ router.post("/register", function (req, res) {
         });
       } else {
         res.status(401).json({
-          message: "Email already Taken",
+          message: "Email already taken",
           status: res.statusCode,
         });
       }
@@ -89,7 +89,7 @@ router.post("/login", function (req, res) {
     }).then((value) => {
       if (value === null) {
         res.status(401).json({
-          message: "Email is not Registered Please SignUp",
+          message: "Email is not registered. Please Signup",
           status: res.statusCode,
           token: "",
         });
@@ -115,7 +115,7 @@ router.post("/login", function (req, res) {
             });
           } else {
             res.status(401).json({
-              message: "Invalid Crendential given",
+              message: "Invalid crendential given",
               status: res.statusCode,
               token: "",
             });
@@ -144,7 +144,7 @@ router.get("/profile", function (req, res) {
       }
       res.status(401).json({
         status: res.statusCode,
-        message: "please Login",
+        message: "Please Login",
       });
     });
   } else {
