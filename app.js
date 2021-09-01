@@ -1,6 +1,5 @@
 const express = require("express");
 const dbConnection = require("./connections/db");
-const path = require("path");
 
 // połączenie z serwerenm
 dbConnection
@@ -26,9 +25,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
-// dodanie dostępu do pliku public
-app.use(express.static(path.join(__dirname, "public")));
 
 // parsowanie application/x-www-form-urlencoded
 app.use(
