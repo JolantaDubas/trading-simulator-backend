@@ -1,5 +1,6 @@
 const express = require("express");
 const dbConnection = require("./connections/db");
+var cors = require("cors");
 
 // połączenie z serwerenm
 dbConnection
@@ -15,6 +16,8 @@ dbConnection
 const app = express();
 
 // ustawienie uprawnień cors
+app.use(cors());
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true);
