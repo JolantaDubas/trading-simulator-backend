@@ -81,7 +81,6 @@ router.post("/login", function (req, res) {
     });
   } else {
     // check mail in db or not
-
     UserModel.findOne({
       where: {
         email,

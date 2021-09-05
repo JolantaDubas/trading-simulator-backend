@@ -19,9 +19,9 @@ User.init(
     email: { type: DataTypes.STRING, allowNull: false },
   },
   {
-    modelName: "user_table",
+    modelName: "user",
     sequelize,
-    tableName: "user_table",
+    tableName: "user",
     timestamps: false,
   }
 );
